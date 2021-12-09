@@ -1,0 +1,28 @@
+
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Blogs</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+<!-- header и footer вынесли в общий html файл и подключаем на всех страницах-->
+<header th:insert="blocks/header :: header"></header>
+
+<div class="col-md-5 p-lg-5 mx-auto my-5">
+
+    <div th:each="el : ${article}" class="alert alert-info mt-2">
+        <h1 th:text="${el.name}"/>
+        <p th:text="${el.fullText}"/>
+        <p><b>Views:</b> <span th:text="${el.countViews}"/></p>
+        <a th:href="'/blogs/' + ${el.id} + '/edit'" class="btn btn-warning">Edit</a><br/><br/>
+        <form th:action="'/blogs/' + ${el.id} + '/delete'" method="post">
+            <button class="btn btn-warning" type="submit">Delete</button>
+        </form>
+
+    </div>
+</div>
+<footer th:insert="blocks/footer :: footer"></footer>
+</body>
+</html>
